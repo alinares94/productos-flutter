@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productos/pages/pages.dart';
 
 void main() => runApp(const ProductosApp());
 
@@ -10,13 +11,13 @@ class ProductosApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Productos App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
+      initialRoute: 'login',
+      routes: {
+        'login': (_) => const LoginPage(),
+        'home': (_) => const HomePage(),
+      },
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[300]
       ),
     );
   }
