@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productos/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -6,9 +7,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Text('Home'),
+      appBar: AppBar(
+        title: const Text('Productos')
+      ),
+      body: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index)  => ProductCardWidget()
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () => {},
       ),
     );
   }

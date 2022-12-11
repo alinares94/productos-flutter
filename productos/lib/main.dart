@@ -17,7 +17,15 @@ class ProductosApp extends StatelessWidget {
         'home': (_) => const HomePage(),
       },
       theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: Colors.grey[300]
+        scaffoldBackgroundColor: Colors.grey[300],
+        appBarTheme: const AppBarTheme(
+          elevation: 5,
+          color: Colors.indigo
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.indigo,
+          elevation: 5
+        )
       ),
     );
   }
