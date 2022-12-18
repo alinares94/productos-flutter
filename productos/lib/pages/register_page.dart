@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:productos/providers/providers.dart';
+import 'package:productos/providers/login_form_provider.dart';
 import 'package:productos/services/services.dart';
 import 'package:productos/themes/input_decorations.dart';
 import 'package:productos/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
-                    Text('Login', style: Theme.of(context).textTheme.headline4),
+                    Text('Registro', style: Theme.of(context).textTheme.headline4),
                     const SizedBox(height: 20),
 
                     ChangeNotifierProvider(
@@ -31,21 +31,19 @@ class LoginPage extends StatelessWidget {
                 )
               ),
               const SizedBox(height: 50),
-
               TextButton(
                 style: ButtonStyle(
                   overlayColor: MaterialStateProperty.all(Colors.deepPurple.withOpacity(0.1)),
                   shape: MaterialStateProperty.all( const StadiumBorder() )
                 ),
                 onPressed: () =>{
-                  Navigator.pushReplacementNamed(context, 'register')
+                  Navigator.pushReplacementNamed(context, 'login')
                 }, 
                 child: const Text(
-                  'Crear una nueva cuenta',
+                  '¿Ya tienes una cuenta?',
                   style: TextStyle(fontSize: 18, color: Colors.black87 )
                 )
               ),
-
               const SizedBox(height: 50),
             ])
           )
@@ -110,19 +108,19 @@ class _LoginForm extends StatelessWidget {
             onPressed: loginProvider.isLoading ? null : () async {
               FocusScope.of(context).unfocus();
               final authService = Provider.of<AuthService>(context, listen: false);
-              
+
               if (!loginProvider.isValidForm()) {
                 return;
               }
-
               loginProvider.isLoading = true;
-              final error = await authService.login(loginProvider.email, loginProvider.pwd);
+
+              final error = await authService.createUser(loginProvider.email, loginProvider.pwd);
 
               if (error == null) {
                 // ignore: use_build_context_synchronously
                 await Navigator.pushNamed(context, 'home');
               } else {
-                NotificationService.showSnackbar(error);
+                print(error);
               }
 
               loginProvider.isLoading = false;

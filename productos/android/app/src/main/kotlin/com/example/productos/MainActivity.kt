@@ -1,4 +1,4 @@
-package com.example.productos
+package com.alinares.productos
 
 import io.flutter.embedding.android.FlutterActivity
 
